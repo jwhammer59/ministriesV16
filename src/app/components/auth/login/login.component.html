@@ -1,0 +1,86 @@
+<p-toast></p-toast>
+<div class="flex justify-content-center mt-4">
+  <p-card
+    [style]="{
+      width: '25rem',
+      'margin-bottom': '2em',
+      'background-color': '#9AE0D9'
+    }"
+  >
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-center">
+        <h2>
+          <i class="pi pi-sign-in pr-3" style="font-size: 1.5rem"></i> Login
+        </h2>
+      </div>
+    </ng-template>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+      <div class="grid p-fluid">
+        <div class="col-12">
+          <div class="field">
+            <label for="emailInput"> Email</label>
+            <input
+              class="ng-invalid ng-touched p-inputtext-sm"
+              type="text"
+              pInputText
+              id="emailInput"
+              name="email"
+              placeholder="Email Required"
+              formControlName="email"
+              required
+            />
+            <small
+              *ngIf="
+                (f['email'].invalid && f['email'].dirty) ||
+                (loginForm.invalid && this.submitted && f['email'].invalid)
+              "
+              id="email-help"
+              class="p-error"
+            >
+              {{ getEmailErrorMessage() }}
+            </small>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="field">
+            <label for="passwordInput"> Password</label>
+            <p-password
+              class="ng-invalid ng-touched p-inputtext-sm"
+              [feedback]="false"
+              [showClear]="true"
+              placeholder="Password Required"
+              id="passwordInput"
+              name="password"
+              formControlName="password"
+              required
+            ></p-password>
+            <small
+              *ngIf="
+                (f['password'].invalid && f['password'].dirty) ||
+                (loginForm.invalid && this.submitted && f['password'].invalid)
+              "
+              id="password-help"
+              class="p-error"
+            >
+              {{ getPasswordErrorMessage() }}
+            </small>
+          </div>
+        </div>
+
+        <div class="flex justify-content-center col-12">
+          <div>
+            <button
+              pButton
+              icon="pi pi-sign-in"
+              class="p-button-outlined p-button-help"
+              label="Login"
+              type="submit"
+              value="Submit"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>
