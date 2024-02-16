@@ -2,20 +2,18 @@
   <p-menubar
     [model]="loggedInItems"
     [style]="{
-      'background-color': 'var(--primary-300)'
+      'background-color': 'var(--primary-200)'
     }"
     styleClass="shadow-5"
   >
     <ng-template pTemplate="end">
-      <div>
-        <div class="flex justify-content-center align-items-center">
-          <div>
-            <h2 class="mb-1">{{ navTitle }}</h2>
-            <span>{{ loggedInUser }}</span>
-          </div>
-          <div>
-            <img width="100px" height="100px" src="{{ navLogo }}" />
-          </div>
+      <div class="flex justify-content-center align-items-center">
+        <div>
+          <h2 class="mb-1">{{ navTitle }}</h2>
+          <span>{{ loggedInUser }}</span>
+        </div>
+        <div>
+          <img width="100px" height="100px" src="{{ navLogo }}" />
         </div>
       </div>
     </ng-template>
@@ -23,16 +21,19 @@
 </div>
 
 <div *ngIf="!this.auth.currentUser">
-  <p-menubar [model]="loggedOutItems">
+  <p-menubar
+    [model]="loggedOutItems"
+    [style]="{
+      'background-color': 'var(--primary-200)'
+    }"
+    styleClass="shadow-5"
+  >
     <ng-template pTemplate="end">
       <div>
-        <span class="mr-2">
-          <h2>
-            {{ navTitle }}
-            <img width="100px" height="100px" src="{{ navLogo }}" />
-          </h2>
-        </span>
-        <span>{{ loggedInUser }}</span>
+        <h2 class="flex align-items-center my-0">
+          {{ navTitle }}
+          <img width="100px" height="100px" src="{{ navLogo }}" />
+        </h2>
       </div>
     </ng-template>
   </p-menubar>

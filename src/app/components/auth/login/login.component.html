@@ -4,7 +4,7 @@
     [style]="{
       width: '25rem',
       'margin-bottom': '2em',
-      'background-color': '#9AE0D9'
+      'background-color': 'var(--primary-100)'
     }"
   >
     <ng-template pTemplate="header">
@@ -70,14 +70,14 @@
 
         <div class="flex justify-content-center col-12">
           <div>
-            <button
-              pButton
+            <p-button
               icon="pi pi-sign-in"
-              class="p-button-outlined p-button-help"
+              [outlined]="true"
+              severity="primary"
               label="Login"
               type="submit"
               value="Submit"
-            ></button>
+            ></p-button>
           </div>
         </div>
       </div>

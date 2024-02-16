@@ -17,8 +17,8 @@ import { MenubarModule } from 'primeng/menubar';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnDestroy {
-  @Input() navTitle: string = 'Ministries Schedular Pro';
-  @Input() navLogo: string = 'MSP_Logo.png';
+  @Input() navTitle: string = 'Ministries Scheduler Pro';
+  @Input() navLogo: string = 'assets/MSP_Logo2.png';
 
   auth: Auth = inject(Auth);
   authState$ = authState(this.auth);
