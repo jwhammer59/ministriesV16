@@ -1,1 +1,3 @@
-<p>loading works!</p>
+<div class="spinner-container" *ngIf="loadingService.loading$ | async">
+  <p-progressSpinner></p-progressSpinner>
+</div>

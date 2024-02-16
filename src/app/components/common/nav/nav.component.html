@@ -1,1 +1,39 @@
-<p>nav works!</p>
+<div *ngIf="this.auth.currentUser">
+  <p-menubar
+    [model]="loggedInItems"
+    [style]="{
+      'background-color': 'var(--primary-300)'
+    }"
+    styleClass="shadow-5"
+  >
+    <ng-template pTemplate="end">
+      <div>
+        <div class="flex justify-content-center align-items-center">
+          <div>
+            <h2 class="mb-1">{{ navTitle }}</h2>
+            <span>{{ loggedInUser }}</span>
+          </div>
+          <div>
+            <img width="100px" height="100px" src="{{ navLogo }}" />
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>
+
+<div *ngIf="!this.auth.currentUser">
+  <p-menubar [model]="loggedOutItems">
+    <ng-template pTemplate="end">
+      <div>
+        <span class="mr-2">
+          <h2>
+            {{ navTitle }}
+            <img width="100px" height="100px" src="{{ navLogo }}" />
+          </h2>
+        </span>
+        <span>{{ loggedInUser }}</span>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>
