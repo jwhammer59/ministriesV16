@@ -1,1 +1,7 @@
-<p>body works!</p>
+<p-panel
+  styleClass="shadow-7"
+  header="{{ bodyTitle }}"
+  [style]="{ width: '90vw', 'background-color': '{{ bodyColor }}' }"
+>
+  <ng-content></ng-content>
+</p-panel>

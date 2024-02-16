@@ -1,1 +1,11 @@
-<p>card works!</p>
+<p-card
+  styleClass="shadow-7"
+  header="{{ cardHeader }}"
+  subheader="{{ cardSubheader }}"
+  [style]="{
+    width: '{{ cardWidth }}',
+    'background-color': '{{ cardBgColor }}'
+  }"
+>
+  <ng-content></ng-content>
+</p-card>

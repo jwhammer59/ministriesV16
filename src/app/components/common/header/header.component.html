@@ -1,1 +1,26 @@
-<p>header works!</p>
+<p-toolbar
+  styleClass="var(--primary-900) shadow-8 mt-2 py-0"
+  [style]="{
+    'border-radius': '3rem',
+    'background-image':
+      'linear-gradient(to right, var(--primary-500), var(--primary-800))',
+
+  }"
+>
+  <ng-template pTemplate="center">
+    <i class="{{ icon }} text-white text-2xl mr-2"></i>
+    <h3 class="text-white text-3xl">{{ title }}</h3>
+  </ng-template>
+  <ng-template *ngIf="buttonVisible" pTemplate="end">
+    <button
+      pButton
+      pTooltip="{{ buttonToolTip }}"
+      class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+    >
+      <i class="{{ buttonIcon }} text-2xl" (click)="headerBtnAction()"></i>
+    </button>
+  </ng-template>
+  <ng-template *ngIf="!buttonVisible" pTemplate="end">
+    <img width="75px" height="75px" src="{{ logo }}" alt=""
+  /></ng-template>
+</p-toolbar>
