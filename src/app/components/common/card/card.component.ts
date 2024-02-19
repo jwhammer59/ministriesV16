@@ -11,8 +11,6 @@ import { CardModule } from 'primeng/card';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  @Input() cardHeader: string = '';
-  @Input() cardSubheader: string = '';
-  @Input() cardBgColor: string = '#ABC9FB';
-  @Input() cardWidth: string = '90vw';
+  @Input() header: string = '';
+  @Input() subheader: string = '';
 }

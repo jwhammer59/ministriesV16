@@ -1,0 +1,70 @@
+<p-toast key="error"></p-toast>
+<p-toast key="success" (onClose)="goToMinistries()"></p-toast>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [logo]="headerLogo"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <div class="flex justify-content-center">
+      <form
+        [formGroup]="addMinistryForm"
+        (ngSubmit)="onSubmit(addMinistryForm)"
+      >
+        <p-card
+          header="{{ cardHeader }}"
+          [style]="{ width: '50vw', backgroundColor: '#d0e1fd' }"
+        >
+          <ng-template pTemplate="content">
+            <div class="flex justify-content-center">
+              <div class="field">
+                <label for="ministryName">Ministry Name</label>
+                <input
+                  id="ministryName"
+                  type="text"
+                  formControlName="ministryName"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Ministry Name"
+                />
+                <small
+                  *ngIf="
+                    (f['ministryName'].invalid && f['ministryName'].dirty) ||
+                    (addMinistryForm.invalid &&
+                      this.submitted &&
+                      f['ministryName'].invalid)
+                  "
+                  id="ministryName-help"
+                  class="p-error"
+                  >{{ getMinistryNameMessage() }}</small
+                >
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex justify-content-end">
+              <div>
+                <p-button
+                  type="submit"
+                  value="submit"
+                  [text]="true"
+                  label="Save"
+                  icon="pi pi-fw pi-save"
+                ></p-button>
+              </div>
+              <div>
+                <p-button
+                  label="Cancel"
+                  icon="pi pi-fw pi-times"
+                  [text]="true"
+                  severity="warning"
+                  (onClick)="goToMinistries()"
+                ></p-button>
+              </div>
+            </div>
+          </ng-template>
+        </p-card>
+      </form>
+    </div>
+  </app-body>
+</div>

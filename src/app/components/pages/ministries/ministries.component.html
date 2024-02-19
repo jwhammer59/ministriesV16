@@ -1,1 +1,18 @@
-<p>ministries works!</p>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [buttonToolTip]="headerBtnToolTip"
+  [buttonIcon]="headerBtnIcon"
+  [buttonVisible]="headerBtnVisible"
+  [logo]="headerLogo"
+  (buttonAction)="addMinistry()"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <div class="flex justify-content-center">
+      <app-card [header]="cardHeader">
+        <app-ministry-table></app-ministry-table>
+      </app-card>
+    </div>
+  </app-body>
+</div>

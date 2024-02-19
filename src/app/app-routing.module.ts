@@ -25,6 +25,30 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'ministries',
+    loadComponent: () =>
+      import('./components/pages/ministries/ministries.component').then(
+        (m) => m.MinistriesComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-ministries',
+    loadComponent: () =>
+      import(
+        './components/pages/ministries/add-ministries/add-ministries.component'
+      ).then((m) => m.AddMinistriesComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-ministry/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/ministries/edit-ministries/edit-ministries.component'
+      ).then((m) => m.EditMinistriesComponent),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

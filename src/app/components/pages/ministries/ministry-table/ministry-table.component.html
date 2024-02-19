@@ -1,0 +1,43 @@
+<div *ngIf="ministries$ | async as ministries">
+  <p-table
+    [value]="ministries"
+    [globalFilterFields]="['ministryName']"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    dataKey="id"
+    selectionMode="single"
+    (onRowSelect)="goToSelectedMinistry($event)"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="ministryName">
+          <div class="flex justify-content-center">
+            Name
+            <p-sortIcon field="ministryName"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ministry>
+      <tr [pSelectableRow]="ministry">
+        <div class="flex justify-content-center">
+          <td>{{ ministry.ministryName }}</td>
+        </div>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No data found...</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Total Members:
+        {{ ministries ? ministries.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>

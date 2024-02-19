@@ -5,10 +5,18 @@ import { HeaderComponent } from '../../common/header/header.component';
 import { BodyComponent } from '../../common/body/body.component';
 import { CardComponent } from '../../common/card/card.component';
 
+import { MinistryTableComponent } from '../ministries/ministry-table/ministry-table.component';
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, BodyComponent, CardComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    BodyComponent,
+    CardComponent,
+    MinistryTableComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
