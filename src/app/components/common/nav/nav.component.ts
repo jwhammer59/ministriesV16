@@ -91,9 +91,9 @@ export class NavComponent implements OnDestroy {
           routerLink: ['family-ids'],
         },
         {
-          label: 'Ministry Types',
-          icon: 'pi pi-fw pi-key',
-          routerLink: ['ministry-types'],
+          label: 'Ministries',
+          icon: 'pi pi-fw pi-heart',
+          routerLink: ['ministries'],
         },
       ],
     },
