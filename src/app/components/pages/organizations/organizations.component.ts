@@ -45,13 +45,14 @@ export class OrganizationsComponent implements OnInit {
   headerTitle: string = 'Organization Info';
   headerIcon: string = 'pi pi-building';
   buttonVisible: boolean = false;
+  headerLogo: string = 'assets/MSP_Logo2.jpg';
 
   id: string = '';
 
   organizations: Organization[] = [];
 
   organization: Organization = {
-    id: '',
+    id: '1',
     orgName: '',
     orgPastorName: '',
     orgOfficeMgrName: '',
@@ -66,14 +67,14 @@ export class OrganizationsComponent implements OnInit {
   };
 
   constructor(
-    private organizationsService: OrganizationsService,
+    private organizationService: OrganizationsService,
     private loadingService: LoadingService,
     private messageService: MessageService,
     private ngZone: NgZone,
     private router: Router,
     private primengConfig: PrimeNGConfig
   ) {
-    this.organizationsService.getOrganizations().subscribe((org) => {
+    this.organizationService.getOrganizations().subscribe((org) => {
       this.organizations = org;
     });
   }
@@ -82,8 +83,11 @@ export class OrganizationsComponent implements OnInit {
     this.primengConfig.ripple = true;
     this.loadingService.loadingOn();
     setTimeout(() => {
-      this.organization = this.organizations[0];
-      this.id = this.organization.id!;
+      if (this.organizations.length > 0) {
+        this.organization = this.organizations[0];
+        this.id = this.organization.id!;
+      }
+
       this.loadingService.loadingOff();
     }, 2000);
   }
@@ -97,7 +101,7 @@ export class OrganizationsComponent implements OnInit {
         life: 3000,
       });
     } else {
-      this.organizationsService.updateOrganization(id, val);
+      this.organizationService.updateOrganization(id, val);
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
