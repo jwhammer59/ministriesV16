@@ -5,21 +5,35 @@
 ></app-header>
 <div class="flex justify-content-center mt-1">
   <app-body>
-    <div class="grid p-fluid">
-      <div class="col-12 md:col-8">
-        <app-card header="Events"></app-card>
-      </div>
-      <div class="col-12 md:col-4">
-        <app-card header="Family ID's"></app-card>
-      </div>
-      <div class="col-12 md:col-8">
-        <app-card header="Volunteers"></app-card>
-      </div>
-      <div class="col-12 md:col-4">
-        <app-card header="Ministry Table">
-          <app-ministry-table></app-ministry-table>
-        </app-card>
-      </div>
-    </div>
+    <p-tabView>
+      <p-tabPanel
+        ><ng-template pTemplate="header">
+          <i class="pi pi-calendar mr-2"></i>
+          <span>Events</span>
+        </ng-template>
+        <app-card header="Events Table"></app-card>
+      </p-tabPanel>
+      <p-tabPanel
+        ><ng-template pTemplate="header">
+          <i class="pi pi-id-card mr-2"></i>
+          <span>Family ID's</span>
+        </ng-template>
+        <app-card header="Family ID's Table"></app-card>
+      </p-tabPanel>
+      <p-tabPanel
+        ><ng-template pTemplate="header">
+          <i class="pi pi-users mr-2"></i>
+          <span>Volunteers</span>
+        </ng-template>
+        <app-card header="Volunteers Table"></app-card>
+      </p-tabPanel>
+      <p-tabPanel
+        ><ng-template pTemplate="header">
+          <i class="pi pi-heart mr-2"></i>
+          <span>Ministries</span>
+        </ng-template>
+        <app-ministry-table></app-ministry-table>
+      </p-tabPanel>
+    </p-tabView>
   </app-body>
 </div>

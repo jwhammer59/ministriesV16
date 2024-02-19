@@ -7,11 +7,14 @@ import { CardComponent } from '../../common/card/card.component';
 
 import { MinistryTableComponent } from '../ministries/ministry-table/ministry-table.component';
 
+import { TabViewModule } from 'primeng/tabview';
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
+    TabViewModule,
     HeaderComponent,
     BodyComponent,
     CardComponent,
