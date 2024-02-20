@@ -11,28 +11,32 @@
           <i class="pi pi-calendar mr-2"></i>
           <span>Events</span>
         </ng-template>
-        <app-card header="Events Table"></app-card>
+        <app-card header="Events List"></app-card>
       </p-tabPanel>
       <p-tabPanel
         ><ng-template pTemplate="header">
           <i class="pi pi-id-card mr-2"></i>
           <span>Family ID's</span>
         </ng-template>
-        <app-card header="Family ID's Table"></app-card>
+        <app-card header="Family ID's List">
+          <app-family-id-table></app-family-id-table>
+        </app-card>
       </p-tabPanel>
       <p-tabPanel
         ><ng-template pTemplate="header">
           <i class="pi pi-users mr-2"></i>
           <span>Volunteers</span>
         </ng-template>
-        <app-card header="Volunteers Table"></app-card>
+        <app-card header="Volunteers List"></app-card>
       </p-tabPanel>
       <p-tabPanel
         ><ng-template pTemplate="header">
           <i class="pi pi-heart mr-2"></i>
           <span>Ministries</span>
         </ng-template>
-        <app-ministry-table></app-ministry-table>
+        <app-card header="Ministries List">
+          <app-ministry-table></app-ministry-table>
+        </app-card>
       </p-tabPanel>
     </p-tabView>
   </app-body>

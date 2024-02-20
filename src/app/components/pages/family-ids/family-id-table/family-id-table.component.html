@@ -1,0 +1,83 @@
+<div *ngIf="familyIds$ | async as familyIds">
+  <p-table
+    [value]="familyIds"
+    [globalFilterFields]="[
+      'familyIdName',
+      'familyIdFullName',
+      'familyIdPhone',
+      'familyIdEmail'
+    ]"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    dataKey="id"
+    selectionMode="single"
+    (onRowSelect)="goToSelectedFamilyId($event)"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="familyIdName">
+          <div class="flex justify-content-center">
+            Family ID
+            <p-sortIcon field="familyIdName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="familyIdFullName">
+          <div class="flex justify-content-center">
+            Family ID Full Name
+            <p-sortIcon field="familyIdFullName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="familyIdPhone">
+          <div class="flex justify-content-center">
+            Family ID Phone
+            <p-sortIcon field="familyIdPhone"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="familyIdEmail">
+          <div class="flex justify-content-center">
+            Family ID Email
+            <p-sortIcon field="familyIdEmail"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-familyId>
+      <tr [pSelectableRow]="familyId">
+        <td>
+          <div class="flex justify-content-center">
+            {{ familyId.familyIdName }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ familyId.familyIdFullName }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ familyId.familyIdPhone }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ familyId.familyIdEmail }}
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No data found...</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Total Family ID's:
+        {{ familyIds ? familyIds.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>

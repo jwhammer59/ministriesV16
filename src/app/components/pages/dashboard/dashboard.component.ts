@@ -7,6 +7,8 @@ import { CardComponent } from '../../common/card/card.component';
 
 import { MinistryTableComponent } from '../ministries/ministry-table/ministry-table.component';
 
+import { FamilyIdTableComponent } from '../family-ids/family-id-table/family-id-table.component';
+
 import { TabViewModule } from 'primeng/tabview';
 
 @Component({
@@ -19,6 +21,7 @@ import { TabViewModule } from 'primeng/tabview';
     BodyComponent,
     CardComponent,
     MinistryTableComponent,
+    FamilyIdTableComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],

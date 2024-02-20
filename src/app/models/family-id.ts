@@ -4,8 +4,8 @@ export interface FamilyId {
   familyIdFullName: string;
   familyIdPhone: string;
   familyIdEmail: string;
-  familyIdAddress1: string;
-  familyIdAddress2: string;
+  familyIdAdd1: string;
+  familyIdAdd2: string;
   familyIdCity: string;
   familyIdState: string;
   familyIdZipcode: string;

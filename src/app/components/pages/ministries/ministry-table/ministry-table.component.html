@@ -23,9 +23,11 @@
     </ng-template>
     <ng-template pTemplate="body" let-ministry>
       <tr [pSelectableRow]="ministry">
-        <div class="flex justify-content-center">
-          <td>{{ ministry.ministryName }}</td>
-        </div>
+        <td>
+          <div class="flex justify-content-center">
+            {{ ministry.ministryName }}
+          </div>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">

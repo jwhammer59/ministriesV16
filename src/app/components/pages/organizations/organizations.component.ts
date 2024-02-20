@@ -45,7 +45,7 @@ export class OrganizationsComponent implements OnInit {
   headerTitle: string = 'Organization Info';
   headerIcon: string = 'pi pi-building';
   buttonVisible: boolean = false;
-  headerLogo: string = 'assets/MSP_Logo2.jpg';
+  headerLogo: string = 'assets/MSP_Logo2.png';
 
   id: string = '';
 

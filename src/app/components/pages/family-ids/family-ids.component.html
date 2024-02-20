@@ -1,1 +1,16 @@
-<p>family-ids works!</p>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [buttonToolTip]="headerBtnToolTip"
+  [buttonIcon]="headerBtnIcon"
+  [buttonVisible]="headerBtnVisible"
+  [logo]="headerLogo"
+  (buttonAction)="addMinistry()"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <app-card header="Family IDs List">
+      <app-family-id-table></app-family-id-table>
+    </app-card>
+  </app-body>
+</div>

@@ -26,6 +26,30 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'family-ids',
+    loadComponent: () =>
+      import('./components/pages/family-ids/family-ids.component').then(
+        (m) => m.FamilyIdsComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-family-ids',
+    loadComponent: () =>
+      import(
+        './components/pages/family-ids/add-family-ids/add-family-ids.component'
+      ).then((m) => m.AddFamilyIdsComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-family-id/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/family-ids/edit-family-ids/edit-family-ids.component'
+      ).then((m) => m.EditFamilyIdsComponent),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'ministries',
     loadComponent: () =>
       import('./components/pages/ministries/ministries.component').then(
