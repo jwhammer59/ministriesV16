@@ -11,6 +11,9 @@ import { VolunteersService } from 'src/app/services/volunteers.service';
 import { FamilyId } from 'src/app/models/family-id';
 import { FamilyIdsService } from 'src/app/services/family-ids.service';
 
+import { Ministry } from 'src/app/models/ministry';
+import { MinistryService } from 'src/app/services/ministry.service';
+
 import { State } from 'src/app/models/state';
 import { STATES } from 'src/app/data/state-data';
 
@@ -28,6 +31,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
+import { PickListModule } from 'primeng/picklist';
+import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
 
 import { PrimeNGConfig, MessageService } from 'primeng/api';
@@ -48,6 +53,8 @@ import { Observable } from 'rxjs';
     DropdownModule,
     InputMaskModule,
     InputTextModule,
+    PickListModule,
+    TabViewModule,
     ToastModule,
   ],
   templateUrl: './add-volunteer.component.html',
@@ -68,10 +75,14 @@ export class AddVolunteerComponent implements OnInit {
 
   allFamilyIds$!: Observable<FamilyId[]>;
 
+  sourceMinistries: Ministry[] = [];
+  targetMinistries: Ministry[] = [];
+
   states: State[] = STATES;
 
   constructor(
     private volunteersService: VolunteersService,
+    private ministryService: MinistryService,
     private familyIdsService: FamilyIdsService,
     private messageService: MessageService,
     private fb: FormBuilder,
@@ -96,6 +107,9 @@ export class AddVolunteerComponent implements OnInit {
       isFamilyIDHead: false,
     });
     this.allFamilyIds$ = this.familyIdsService.getFamilyIds();
+    this.ministryService.getMinistries().subscribe((data) => {
+      this.sourceMinistries = data;
+    });
   }
 
   ngOnInit(): void {
@@ -153,5 +167,13 @@ export class AddVolunteerComponent implements OnInit {
   cancelAddVolunteer() {
     this.addVolunteerForm.reset();
     this.goToVolunteers();
+  }
+
+  sendToMinistriesTarget() {
+    this.f['ministries'].setValue(this.targetMinistries);
+  }
+
+  sendToMinistriesSource() {
+    this.f['ministries'].setValue(this.targetMinistries);
   }
 }
