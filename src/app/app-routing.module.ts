@@ -18,6 +18,38 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'volunteers',
+    loadComponent: () =>
+      import('./components/pages/volunteers/volunteers.component').then(
+        (m) => m.VolunteersComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-volunteer',
+    loadComponent: () =>
+      import(
+        './components/pages/volunteers/add-volunteer/add-volunteer.component'
+      ).then((m) => m.AddVolunteerComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-volunteer/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/volunteers/edit-volunteer/edit-volunteer.component'
+      ).then((m) => m.EditVolunteerComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'volunteer-detail/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/volunteers/volunteer-detail/volunteer-detail.component'
+      ).then((m) => m.VolunteerDetailComponent),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'organizations',
     loadComponent: () =>
       import('./components/pages/organizations/organizations.component').then(

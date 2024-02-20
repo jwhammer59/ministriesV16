@@ -1,0 +1,282 @@
+<p-toast key="error"></p-toast>
+<p-toast key="success" (onClose)="goToVolunteers()"></p-toast>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [logo]="headerLogo"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <div class="flex justify-content-center">
+      <form
+        [formGroup]="addVolunteerForm"
+        (ngSubmit)="onSubmit(addVolunteerForm)"
+      >
+        <p-card header="Add Volunteer Form">
+          <ng-template pTemplate="content">
+            <div class="formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label for="familyID">Family ID</label>
+                <p-dropdown
+                  *ngIf="allFamilyIds$ | async as familyIds"
+                  styleClass="text-base text-color surface-overlay border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary p-inputtext-sm w-full"
+                  [options]="familyIds"
+                  name="familyID"
+                  id="familyID"
+                  formControlName="familyID"
+                  optionLabel="familyIdName"
+                  optionValue="familyIdName"
+                  placeholder="Select a Family ID"
+                ></p-dropdown>
+                <small
+                  *ngIf="
+                    (f['familyID'].invalid && f['familyID'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['familyID'].invalid)
+                  "
+                  id="familyID-help"
+                  class="p-error"
+                  >Family ID is required.</small
+                >
+              </div>
+              <div class="col-12 md:col-4 flex align-items-center">
+                <div class="field-checkbox mt-4 ml-8">
+                  <p-checkbox
+                    formControlName="isActive"
+                    [binary]="true"
+                    inputId="isActive"
+                    name="isActive"
+                  ></p-checkbox>
+                  <label for="isActive">Is Active?</label>
+                </div>
+              </div>
+              <div class="col-12 md:col-4 flex align-items-center">
+                <div class="field-checkbox mt-4 ml-8">
+                  <p-checkbox
+                    formControlName="isFamilyIDHead"
+                    [binary]="true"
+                    inputId="isFamilyIDHead"
+                    name="isFamilyIDHead"
+                  ></p-checkbox>
+                  <label for="isFamilyIDHead">Is Family ID Head?</label>
+                </div>
+              </div>
+
+              <div class="field col-12 md:col-5">
+                <label for="firstName">First Name</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  formControlName="firstName"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter First Name"
+                />
+                <small
+                  *ngIf="
+                    (f['firstName'].invalid && f['firstName'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['firstName'].invalid)
+                  "
+                  id="firstName-help"
+                  class="p-error"
+                  >{{ getFirstNameMessage() }}</small
+                >
+              </div>
+              <div class="field col-12 md:col-2">
+                <label for="middleInit">M.I.</label>
+                <input
+                  id="middleInit"
+                  type="text"
+                  formControlName="middleInit"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Middle Initial"
+                />
+              </div>
+              <div class="field col-12 md:col-5">
+                <label for="lastName">Last Name</label>
+                <input
+                  id="lastName"
+                  type="text"
+                  formControlName="lastName"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Last Name"
+                />
+                <small
+                  *ngIf="
+                    (f['lastName'].invalid && f['lastName'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['lastName'].invalid)
+                  "
+                  id="lastName-help"
+                  class="p-error"
+                  >{{ getLastNameMessage() }}</small
+                >
+              </div>
+              <div class="field col-12 md:col-6">
+                <label for="phone">Phone</label>
+                <p-inputMask
+                  styleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ng-invalid ng-touched"
+                  mask="(999) 999-9999"
+                  id="phone"
+                  name="phone"
+                  formControlName="phone"
+                  placeholder="(999) 999-9999"
+                ></p-inputMask>
+                <small
+                  *ngIf="
+                    (f['phone'].invalid && f['phone'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['phone'].invalid)
+                  "
+                  id="phone-help"
+                  class="p-error"
+                  >Phone number is required.</small
+                >
+              </div>
+
+              <div class="field col-12 md:col-6">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Email"
+                />
+                <small
+                  *ngIf="
+                    (f['email'].invalid && f['email'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['email'].invalid)
+                  "
+                  id="email-help"
+                  class="p-error"
+                  >Email is required.</small
+                >
+              </div>
+              <div class="field col-12 md:col-6">
+                <label for="address1">Address 1</label>
+                <input
+                  id="address1"
+                  type="text"
+                  formControlName="address1"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Address"
+                />
+                <small
+                  *ngIf="
+                    (f['address1'].invalid && f['address1'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['address1'].invalid)
+                  "
+                  id="address1-help"
+                  class="p-error"
+                  >Address required.</small
+                >
+              </div>
+              <div class="field col-12 md:col-6">
+                <label for="address2">Address 2</label>
+                <input
+                  id="address2"
+                  type="text"
+                  formControlName="address2"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Address 2"
+                />
+              </div>
+              <div class="field col-12 md:col-3">
+                <label for="city">City</label>
+                <input
+                  id="city"
+                  type="text"
+                  formControlName="city"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Family ID City"
+                />
+                <small
+                  *ngIf="
+                    (f['city'].invalid && f['city'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['city'].invalid)
+                  "
+                  id="familyIdCity-help"
+                  class="p-error"
+                  >Family ID city required.</small
+                >
+              </div>
+              <div class="field col-12 md:col-3">
+                <label for="state">State</label>
+                <p-dropdown
+                  styleClass="text-base text-color surface-overlay border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary p-inputtext-sm w-full"
+                  [options]="states"
+                  name="state"
+                  id="state"
+                  formControlName="state"
+                  placeholder="Select a State"
+                ></p-dropdown>
+                <small
+                  *ngIf="
+                    (f['state'].invalid && f['state'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['state'].invalid)
+                  "
+                  id="state-help"
+                  class="p-error"
+                  >State is required.</small
+                >
+              </div>
+              <div class="field col-12 md:col-3">
+                <label for="zipcode">Zipcode</label>
+                <input
+                  id="zipcode"
+                  type="text"
+                  formControlName="zipcode"
+                  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                  placeholder="Enter Zipcode"
+                />
+                <small
+                  *ngIf="
+                    (f['zipcode'].invalid && f['zipcode'].dirty) ||
+                    (addVolunteerForm.invalid &&
+                      this.submitted &&
+                      f['zipcode'].invalid)
+                  "
+                  id="zipcode-help"
+                  class="p-error"
+                  >Zipcode required.</small
+                >
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex justify-content-around">
+              <p-button
+                type="submit"
+                value="Submit"
+                label="Save"
+                icon="pi pi-save"
+                [text]="true"
+                severity="success"
+              ></p-button>
+              <p-button
+                label="Cancel"
+                icon="pi pi-times"
+                [text]="true"
+                severity="warning"
+                (onClick)="cancelAddVolunteer()"
+              ></p-button>
+            </div>
+          </ng-template>
+        </p-card>
+      </form>
+    </div>
+  </app-body>
+</div>

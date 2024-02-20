@@ -1,1 +1,16 @@
-<p>volunteers works!</p>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [buttonToolTip]="headerBtnToolTip"
+  [buttonIcon]="headerBtnIcon"
+  [buttonVisible]="headerBtnVisible"
+  [logo]="headerLogo"
+  (buttonAction)="addVolunteer()"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <app-card header="Volunteers List">
+      <app-volunteer-table></app-volunteer-table>
+    </app-card>
+  </app-body>
+</div>

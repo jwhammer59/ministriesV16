@@ -1,0 +1,118 @@
+<div *ngIf="volunteers$ | async as volunteers">
+  <p-table
+    [value]="volunteers"
+    [globalFilterFields]="[
+      'firstName',
+      'lastName',
+      'familyID',
+      'phone',
+      'email',
+      'isActive',
+      'isFamilyIDHead'
+    ]"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    dataKey="id"
+    selectionMode="single"
+    (onRowSelect)="goToSelectedVolunteer($event)"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="firstName">
+          <div class="flex justify-content-center">
+            First Name
+            <p-sortIcon field="firstName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="lastName">
+          <div class="flex justify-content-center">
+            Last Name
+            <p-sortIcon field="lastName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="phone">
+          <div class="flex justify-content-center">
+            Phone
+            <p-sortIcon field="phone"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="email">
+          <div class="flex justify-content-center">
+            Email
+            <p-sortIcon field="email"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="isActive">
+          <div class="flex justify-content-center">
+            Active?
+            <p-sortIcon field="isActive"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="isFamilyIDHead">
+          <div class="flex justify-content-center">
+            Head Family ID?
+            <p-sortIcon field="isFamilyIDHead"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-volunteer>
+      <tr [pSelectableRow]="volunteer">
+        <td>
+          <div class="flex justify-content-center">
+            {{ volunteer.firstName }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ volunteer.lastName }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ volunteer.phone }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ volunteer.email }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            <p-checkbox
+              [(ngModel)]="volunteer.isActive"
+              [binary]="true"
+              inputId="binary"
+              [disabled]="true"
+            ></p-checkbox>
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            <p-checkbox
+              [(ngModel)]="volunteer.isFamilyIDHead"
+              [binary]="true"
+              inputId="binary"
+              [disabled]="true"
+            ></p-checkbox>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No data found...</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Total Family ID's:
+        {{ volunteers ? volunteers.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>

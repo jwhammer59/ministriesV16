@@ -46,7 +46,7 @@ export class FamilyIdsComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
 
-  addMinistry() {
+  addFamilyID() {
     this.ngZone.run(() => {
       this.router.navigate(['add-family-ids']);
     });

@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { HeaderComponent } from 'src/app/components/common/header/header.component';
 import { BodyComponent } from 'src/app/components/common/body/body.component';
 
+import { Volunteer } from 'src/app/models/volunteer';
+import { VolunteersService } from 'src/app/services/volunteers.service';
+
 import { FamilyId } from 'src/app/models/family-id';
 import { FamilyIdsService } from 'src/app/services/family-ids.service';
 
@@ -13,6 +16,7 @@ import { STATES } from 'src/app/data/state-data';
 
 import {
   ReactiveFormsModule,
+  FormsModule,
   FormGroup,
   FormBuilder,
   Validators,
@@ -20,6 +24,7 @@ import {
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
@@ -29,42 +34,44 @@ import { PrimeNGConfig, MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-add-family-ids',
+  selector: 'app-add-volunteer',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     HeaderComponent,
     BodyComponent,
     ButtonModule,
     CardModule,
+    CheckboxModule,
     DropdownModule,
     InputMaskModule,
     InputTextModule,
     ToastModule,
   ],
-  templateUrl: './add-family-ids.component.html',
-  styleUrls: ['./add-family-ids.component.scss'],
+  templateUrl: './add-volunteer.component.html',
+  styleUrls: ['./add-volunteer.component.scss'],
 })
-export class AddFamilyIdsComponent implements OnInit {
-  headerTitle: string = 'Add Family IDs';
-  headerIcon: string = 'pi pi-fw pi-id-card';
+export class AddVolunteerComponent implements OnInit {
+  headerTitle: string = 'Add Volunteers';
+  headerIcon: string = 'pi pi-fw pi-user-plus';
   headerLogo: string = 'assets/MSP_Logo2.png';
-  cardHeader: string = 'Add Family ID Form';
+  cardHeader: string = 'Add Volunteers Form';
 
   id: string = '';
   submitted: boolean = false;
 
-  addFamilyIdForm!: FormGroup;
+  addVolunteerForm!: FormGroup;
+
+  allVolunteers$!: Observable<Volunteer[]>;
 
   allFamilyIds$!: Observable<FamilyId[]>;
-  allFamilyIdArray: FamilyId[] = [];
-  familyIdNameArray: string[] = [];
-  selectedFamilyIdName: string = '';
 
   states: State[] = STATES;
 
   constructor(
+    private volunteersService: VolunteersService,
     private familyIdsService: FamilyIdsService,
     private messageService: MessageService,
     private fb: FormBuilder,
@@ -72,58 +79,51 @@ export class AddFamilyIdsComponent implements OnInit {
     private ngZone: NgZone,
     private primengConfig: PrimeNGConfig
   ) {
-    this.addFamilyIdForm = this.fb.group({
-      familyIdName: ['', [Validators.required, Validators.minLength(5)]],
-      familyIdFullName: ['', [Validators.required, Validators.minLength(6)]],
-      familyIdPhone: ['', Validators.required],
-      familyIdEmail: ['', Validators.required],
-      familyIdAdd1: ['', Validators.required],
-      familyIdAdd2: '',
-      familyIdCity: ['', Validators.required],
-      familyIdState: ['', Validators.required],
-      familyIdZipcode: ['', Validators.required],
+    this.addVolunteerForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      middleInit: '',
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: '',
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zipcode: ['', Validators.required],
+      familyID: ['', Validators.required],
+      ministries: [],
+      isActive: false,
+      isFamilyIDHead: false,
     });
     this.allFamilyIds$ = this.familyIdsService.getFamilyIds();
-    this.allFamilyIds$.subscribe((ids) => {
-      this.allFamilyIdArray = ids;
-    });
   }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
-    setTimeout(() => {
-      this.processFamilyIdNameArray(this.allFamilyIdArray);
-    }, 2000);
   }
 
   get f() {
-    return this.addFamilyIdForm.controls;
+    return this.addVolunteerForm.controls;
   }
 
-  getFamilyIdNameMessage() {
-    return this.f['familyIdName'].hasError('required')
+  getFirstNameMessage() {
+    return this.f['firstName'].hasError('required')
       ? 'You must enter a name'
-      : this.f['familyIdName'].hasError('minlength')
+      : this.f['firstName'].hasError('minlength')
       ? 'Min length 5 characters'
       : '';
   }
 
-  getFamilyIdFullNameMessage() {
-    return this.f['familyIdFullName'].hasError('required')
+  getLastNameMessage() {
+    return this.f['lastName'].hasError('required')
       ? 'You must enter a name'
-      : this.f['familyIdFullName'].hasError('minlength')
+      : this.f['lastName'].hasError('minlength')
       ? 'Min length 6 characters'
       : '';
   }
 
-  processFamilyIdNameArray(data: FamilyId[]) {
-    this.familyIdNameArray = [];
-    data.map((el) => this.familyIdNameArray.push(el.familyIdName));
-  }
-
-  onSubmit({ value, valid }: { value: FamilyId; valid: boolean }) {
+  onSubmit({ value, valid }: { value: Volunteer; valid: boolean }) {
     this.submitted = true;
-    this.selectedFamilyIdName = value.familyIdName;
     if (!valid) {
       this.messageService.add({
         severity: 'error',
@@ -132,36 +132,26 @@ export class AddFamilyIdsComponent implements OnInit {
         life: 3000,
         key: 'error',
       });
-    } else if (this.familyIdNameArray.includes(this.selectedFamilyIdName)) {
-      const tempFamilyIdName = this.selectedFamilyIdName;
-      this.selectedFamilyIdName = '';
-      this.messageService.add({
-        severity: 'error',
-        summary: `${tempFamilyIdName} is already in use.`,
-        detail: 'Please choose another name',
-        life: 3000,
-        key: 'error',
-      });
     } else {
-      this.familyIdsService.addFamilyId(value);
+      this.volunteersService.addVolunteer(value);
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: 'New Family ID Added!',
+        detail: 'New Volunteer Added!',
         life: 3000,
         key: 'success',
       });
     }
   }
 
-  goToFamilyIds() {
+  goToVolunteers() {
     this.ngZone.run(() => {
-      this.router.navigate(['family-ids']);
+      this.router.navigate(['volunteers']);
     });
   }
 
-  cancelAddFamilyID() {
-    this.addFamilyIdForm.reset();
-    this.goToFamilyIds();
+  cancelAddVolunteer() {
+    this.addVolunteerForm.reset();
+    this.goToVolunteers();
   }
 }

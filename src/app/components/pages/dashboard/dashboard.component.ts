@@ -5,6 +5,8 @@ import { HeaderComponent } from '../../common/header/header.component';
 import { BodyComponent } from '../../common/body/body.component';
 import { CardComponent } from '../../common/card/card.component';
 
+import { VolunteerTableComponent } from '../volunteers/volunteer-table/volunteer-table.component';
+
 import { MinistryTableComponent } from '../ministries/ministry-table/ministry-table.component';
 
 import { FamilyIdTableComponent } from '../family-ids/family-id-table/family-id-table.component';
@@ -20,6 +22,7 @@ import { TabViewModule } from 'primeng/tabview';
     HeaderComponent,
     BodyComponent,
     CardComponent,
+    VolunteerTableComponent,
     MinistryTableComponent,
     FamilyIdTableComponent,
   ],

@@ -11,5 +11,7 @@ export interface Volunteer {
   state: string;
   zipcode: string;
   ministries: [];
+  familyID: string;
   isActive: boolean;
+  isFamilyIDHead: boolean;
 }
