@@ -1,1 +1,96 @@
-<p>volunteer-detail works!</p>
+<p-toast key="error"></p-toast>
+<p-toast key="success" (onClose)="goToVolunteers()"></p-toast>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [logo]="headerLogo"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <p-card
+      header="Volunteer Details - {{ volunteer.firstName }} {{
+        volunteer.middleInit
+      }}. {{ volunteer.lastName }}"
+    >
+      <ng-template pTemplate="content">
+        <p-tabView>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-user mr-2"></i>
+              <span>Personal Info</span>
+            </ng-template>
+            <div class="grid p-fluid">
+              <div class="col-12 md:col-6">
+                <div class="flex flex-column justify-content-start">
+                  <div>
+                    <span class="font-bold mr-2">Phone:</span
+                    ><span>{{ volunteer.phone }}</span>
+                  </div>
+                  <div>
+                    <span class="font-bold mr-2">Email:</span
+                    ><span>{{ volunteer.email }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 md:col-6">
+                <div class="flex flex-column justify-content-start">
+                  <div>
+                    <span class="font-bold mr-2">Family ID:</span
+                    ><span>{{ volunteer.familyID }}</span>
+                  </div>
+                  <div>
+                    <span class="font-bold mr-2">Volunteer Is Active:</span
+                    ><span>{{ volunteer.isActive }}</span>
+                  </div>
+                  <div>
+                    <span class="font-bold mr-2">Is Primary Family ID:</span
+                    ><span>{{ volunteer.isFamilyIDHead }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-map mr-2"></i>
+              <span>Address Info</span>
+            </ng-template>
+            <div class="grid p-fluid">
+              <div class="col-12">
+                <div class="flex flex-column justify-content-start">
+                  <div>
+                    <span class="font-bold mr-2">Address 1:</span
+                    ><span>{{ volunteer.address1 }}</span>
+                  </div>
+                  <div>
+                    <span class="font-bold mr-2">Address 2:</span
+                    ><span>{{ volunteer.address2 }}</span>
+                  </div>
+                  <div>
+                    <span class="font-bold mr-2">City:</span
+                    ><span>{{ volunteer.city }}</span>
+                  </div>
+                  <div>
+                    <span class="font-bold mr-2">State:</span
+                    ><span>{{ volunteer.state }}</span>
+                  </div>
+                  <div>
+                    <span class="font-bold mr-2">Zipcode:</span
+                    ><span>{{ volunteer.zipcode }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-heart mr-2"></i>
+              <span>My Ministries</span>
+            </ng-template>
+          </p-tabPanel>
+        </p-tabView>
+      </ng-template>
+      <ng-template pTemplate="footer"></ng-template>
+    </p-card>
+  </app-body>
+</div>

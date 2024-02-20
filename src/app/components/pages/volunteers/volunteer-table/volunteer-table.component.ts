@@ -31,7 +31,7 @@ export class VolunteerTableComponent {
 
   goToSelectedVolunteer(val: any) {
     this.ngZone.run(() => {
-      this.router.navigate([`edit-volunteer/${val.data.id}`]);
+      this.router.navigate([`volunteer-detail/${val.data.id}`]);
     });
   }
 }
