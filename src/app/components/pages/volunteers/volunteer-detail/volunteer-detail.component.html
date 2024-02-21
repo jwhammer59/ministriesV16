@@ -1,5 +1,4 @@
-<p-toast key="error"></p-toast>
-<p-toast key="success" (onClose)="goToVolunteers()"></p-toast>
+<p-toast></p-toast>
 <app-header
   [title]="headerTitle"
   [icon]="headerIcon"
@@ -87,10 +86,49 @@
               <i class="pi pi-heart mr-2"></i>
               <span>My Ministries</span>
             </ng-template>
+            <div class="flex justify-content-start">
+              <div *ngFor="let ministry of volunteer.ministries">
+                <ul>
+                  <li>{{ ministry.ministryName }}</li>
+                </ul>
+              </div>
+            </div>
           </p-tabPanel>
         </p-tabView>
       </ng-template>
-      <ng-template pTemplate="footer"></ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-around">
+          <p-button
+            [text]="true"
+            label="Back"
+            icon="pi pi-fw pi-arrow-circle-left"
+            severity="info"
+            (onClick)="goToVolunteers()"
+          ></p-button>
+          <p-button
+            [text]="true"
+            label="Edit"
+            icon="pi pi-fw pi-pencil"
+            severity="warning"
+            (onClick)="editVolunteer()"
+          ></p-button>
+          <p-button
+            [text]="true"
+            label="Delete"
+            icon="pi pi-fw pi-trash"
+            severity="danger"
+            (onClick)="deleteVolunteer()"
+          ></p-button>
+        </div>
+      </ng-template>
     </p-card>
   </app-body>
 </div>
+
+<p-confirmDialog
+  [style]="{ width: '30vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  acceptButtonStyleClass="p-button-text"
+  defaultFocus="reject"
+></p-confirmDialog>

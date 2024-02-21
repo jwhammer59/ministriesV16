@@ -64,7 +64,6 @@ export class AddVolunteerComponent implements OnInit {
   headerTitle: string = 'Add Volunteers';
   headerIcon: string = 'pi pi-fw pi-user-plus';
   headerLogo: string = 'assets/MSP_Logo2.png';
-  cardHeader: string = 'Add Volunteers Form';
 
   id: string = '';
   submitted: boolean = false;

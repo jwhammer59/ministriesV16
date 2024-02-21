@@ -1,3 +1,5 @@
+import { Ministry } from './ministry';
+
 export interface Volunteer {
   id?: string;
   firstName: string;
@@ -10,7 +12,7 @@ export interface Volunteer {
   city: string;
   state: string;
   zipcode: string;
-  ministries: [];
+  ministries: Ministry[];
   familyID: string;
   isActive: boolean;
   isFamilyIDHead: boolean;

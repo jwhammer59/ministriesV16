@@ -10,11 +10,17 @@ import { VolunteersService } from 'src/app/services/volunteers.service';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { TabViewModule } from 'primeng/tabview';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
+import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
 
-import { PrimeNGConfig, MessageService } from 'primeng/api';
+import {
+  PrimeNGConfig,
+  MessageService,
+  ConfirmationService,
+  ConfirmEventType,
+} from 'primeng/api';
 
 import { Observable } from 'rxjs';
 
@@ -27,8 +33,9 @@ import { Observable } from 'rxjs';
     BodyComponent,
     ButtonModule,
     CardModule,
-    TabViewModule,
+    ConfirmDialogModule,
     DialogModule,
+    TabViewModule,
     ToastModule,
   ],
   templateUrl: './volunteer-detail.component.html',
@@ -63,6 +70,8 @@ export class VolunteerDetailComponent implements OnInit {
 
   constructor(
     private volunteersService: VolunteersService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute,
     private ngZone: NgZone,
@@ -72,6 +81,7 @@ export class VolunteerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.id = this.route.snapshot.params['id'];
+    this.volunteer$ = this.volunteersService.getVolunteer(this.id);
     this.volunteersService.getVolunteer(this.id).subscribe((vol) => {
       this.volunteer = vol;
     });
@@ -80,6 +90,49 @@ export class VolunteerDetailComponent implements OnInit {
   goToVolunteers() {
     this.ngZone.run(() => {
       this.router.navigate(['volunteers']);
+    });
+  }
+
+  editVolunteer() {
+    this.ngZone.run(() => {
+      this.router.navigate([`edit-volunteer/${this.id}`]);
+    });
+  }
+
+  deleteVolunteer() {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to proceed?  This cannot be undone!',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Confirmed',
+          detail: 'Volunteer Deleted!!',
+        });
+        this.volunteersService.deleteVolunteer(this.id);
+        this.goToVolunteers();
+        this.confirmationService.close();
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Rejected',
+              detail: 'You have rejected Volunteer deletion.',
+            });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'Cancelled',
+              detail: 'You have cancelled Volunteer deletion.',
+            });
+            break;
+        }
+        this.confirmationService.close();
+      },
     });
   }
 }
