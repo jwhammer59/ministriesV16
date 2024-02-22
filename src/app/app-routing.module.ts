@@ -4,6 +4,7 @@ import { WelcomeComponent } from './components/pages/welcome/welcome.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthGuard } from './components/auth/auth.guard';
+import { audit } from 'rxjs';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -15,6 +16,62 @@ const routes: Routes = [
       import('./components/pages/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent
       ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'events',
+    loadComponent: () =>
+      import('./components/pages/events/events.component').then(
+        (m) => m.EventsComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-event',
+    loadComponent: () =>
+      import('./components/pages/events/add-event/add-event.component').then(
+        (m) => m.AddEventComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-event/:id',
+    loadComponent: () =>
+      import('./components/pages/events/edit-event/edit-event.component').then(
+        (m) => m.EditEventComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'event-detail/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/events/event-detail/event-detail.component'
+      ).then((m) => m.EventDetailComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'event-ministries',
+    loadComponent: () =>
+      import(
+        './components/pages/event-ministries/event-ministries.component'
+      ).then((m) => m.EventMinistriesComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-event-ministry',
+    loadComponent: () =>
+      import(
+        './components/pages/event-ministries/add-event-ministries/add-event-ministries.component'
+      ).then((m) => m.AddEventMinistriesComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-event-ministry/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/event-ministries/edit-event-ministries/edit-event-ministries.component'
+      ).then((m) => m.EditEventMinistriesComponent),
     canActivate: [AuthGuard],
   },
   {

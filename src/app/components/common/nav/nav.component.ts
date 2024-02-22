@@ -55,6 +55,11 @@ export class NavComponent implements OnDestroy {
           icon: 'pi pi-fw pi-calendar-plus',
           routerLink: ['add-event'],
         },
+        {
+          label: 'Event Ministries',
+          icon: 'pi pi-fw pi-heart',
+          routerLink: ['event-ministries'],
+        },
       ],
     },
     {
