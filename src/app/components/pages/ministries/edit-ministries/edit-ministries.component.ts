@@ -154,7 +154,7 @@ export class EditMinistriesComponent implements OnInit {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: 'New Ministry Updated!',
+        detail: 'Ministry Updated!',
         life: 3000,
         key: 'success',
       });

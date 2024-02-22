@@ -15,6 +15,15 @@
       </p-tabPanel>
       <p-tabPanel
         ><ng-template pTemplate="header">
+          <i class="pi pi-heart mr-2"></i>
+          <span>Event Ministries</span>
+        </ng-template>
+        <app-card header="Event Ministries List">
+          <app-event-ministries-table></app-event-ministries-table>
+        </app-card>
+      </p-tabPanel>
+      <p-tabPanel
+        ><ng-template pTemplate="header">
           <i class="pi pi-id-card mr-2"></i>
           <span>Family ID's</span>
         </ng-template>

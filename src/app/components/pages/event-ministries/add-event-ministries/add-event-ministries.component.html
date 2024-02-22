@@ -1,1 +1,98 @@
-<p>add-event-ministries works!</p>
+<p-toast key="error"></p-toast>
+<p-toast key="success" (onClose)="goToEventMinistries()"></p-toast>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [logo]="headerLogo"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <div class="flex justify-content-center">
+      <form
+        [formGroup]="addEventMinistryForm"
+        (ngSubmit)="onSubmit(addEventMinistryForm)"
+      >
+        <p-card
+          header="{{ cardHeader }}"
+          [style]="{ width: '50vw', backgroundColor: '#d0e1fd' }"
+        >
+          <ng-template pTemplate="content">
+            <div class="flex justify-content-center">
+              <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                  <label for="eventMinistryName">Event Ministry Name</label>
+                  <input
+                    id="eventMinistryName"
+                    type="text"
+                    formControlName="eventMinistryName"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    placeholder="Enter Ministry Name"
+                  />
+                  <small
+                    *ngIf="
+                      (f['eventMinistryName'].invalid &&
+                        f['ministryName'].dirty) ||
+                      (addEventMinistryForm.invalid &&
+                        this.submitted &&
+                        f['eventMinistryName'].invalid)
+                    "
+                    id="eventMinistryName-help"
+                    class="p-error"
+                    >{{ getEventMinistryNameMessage() }}</small
+                  >
+                </div>
+                <div class="field col-12 md:col-6">
+                  <label for="familyID">Ministry Type</label>
+                  <p-dropdown
+                    *ngIf="allMinistries$ | async as ministries"
+                    styleClass="text-base text-color surface-overlay border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary p-inputtext-sm w-full"
+                    [options]="ministries"
+                    name="ministryName"
+                    id="ministryName"
+                    formControlName="ministryName"
+                    optionLabel="ministryName"
+                    optionValue="ministryName"
+                    placeholder="Select a Ministry Type"
+                  ></p-dropdown>
+                  <small
+                    *ngIf="
+                      (f['ministryName'].invalid && f['ministryName'].dirty) ||
+                      (addEventMinistryForm.invalid &&
+                        this.submitted &&
+                        f['ministryName'].invalid)
+                    "
+                    id="ministryName-help"
+                    class="p-error"
+                    >Miinistry is required.</small
+                  >
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex justify-content-around">
+              <div>
+                <p-button
+                  type="submit"
+                  value="submit"
+                  [text]="true"
+                  label="Save"
+                  icon="pi pi-fw pi-save"
+                ></p-button>
+              </div>
+              <div>
+                <p-button
+                  label="Cancel"
+                  icon="pi pi-fw pi-times"
+                  [text]="true"
+                  severity="warning"
+                  (onClick)="goToEventMinistries()"
+                ></p-button>
+              </div>
+            </div>
+          </ng-template>
+        </p-card>
+      </form>
+    </div>
+  </app-body>
+</div>

@@ -1,1 +1,56 @@
-<p>event-ministries-table works!</p>
+<div *ngIf="eventMinistries$ | async as eventMinistries">
+  <p-table
+    [value]="eventMinistries"
+    [globalFilterFields]="['eventMinistryName', 'ministryName']"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    dataKey="id"
+    selectionMode="single"
+    (onRowSelect)="goToSelectedEventMinistry($event)"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="eventMinistryName">
+          <div class="flex justify-content-center">
+            Event Ministry Name
+            <p-sortIcon field="eventMinistryName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="ministryName">
+          <div class="flex justify-content-center">
+            Ministry Type
+            <p-sortIcon field="ministryName"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-eventMinistry>
+      <tr [pSelectableRow]="eventMinistry">
+        <td>
+          <div class="flex justify-content-center">
+            {{ eventMinistry.eventMinistryName }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ eventMinistry.ministryName }}
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No data found...</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Total Event Ministries:
+        {{ eventMinistries ? eventMinistries.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>
