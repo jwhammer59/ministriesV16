@@ -42,7 +42,7 @@
             </div>
           </ng-template>
           <ng-template pTemplate="footer">
-            <div class="flex justify-content-end">
+            <div class="flex justify-content-around">
               <div>
                 <p-button
                   type="submit"
@@ -61,6 +61,15 @@
                   (onClick)="goToMinistries()"
                 ></p-button>
               </div>
+              <div>
+                <p-button
+                  label="Delete"
+                  icon="pi pi-fw pi-trash"
+                  [text]="true"
+                  severity="danger"
+                  (onClick)="deleteMinsitry()"
+                ></p-button>
+              </div>
             </div>
           </ng-template>
         </p-card>
@@ -68,3 +77,11 @@
     </div>
   </app-body>
 </div>
+
+<p-confirmDialog
+  [style]="{ width: '30vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  acceptButtonStyleClass="p-button-text"
+  defaultFocus="reject"
+></p-confirmDialog>

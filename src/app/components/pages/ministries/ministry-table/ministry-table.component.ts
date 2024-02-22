@@ -28,7 +28,6 @@ export class MinistryTableComponent {
   }
 
   goToSelectedMinistry(val: any) {
-    console.log('go to selected ministry clicked', val);
     this.ngZone.run(() => {
       this.router.navigate([`edit-ministry/${val.data.id}`]);
     });

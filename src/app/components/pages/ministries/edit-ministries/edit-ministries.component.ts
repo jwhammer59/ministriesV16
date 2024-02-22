@@ -19,10 +19,16 @@ import { LoadingService } from 'src/app/services/loading.service';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 
-import { PrimeNGConfig, MessageService } from 'primeng/api';
+import {
+  PrimeNGConfig,
+  MessageService,
+  ConfirmationService,
+  ConfirmEventType,
+} from 'primeng/api';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -35,6 +41,7 @@ import { Observable } from 'rxjs';
     BodyComponent,
     ButtonModule,
     CardModule,
+    ConfirmDialogModule,
     InputTextModule,
     ToastModule,
   ],
@@ -68,6 +75,7 @@ export class EditMinistriesComponent implements OnInit {
     private ministryService: MinistryService,
     private loadingService: LoadingService,
     private messageService: MessageService,
+    private confirmationService: ConfirmationService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -156,6 +164,43 @@ export class EditMinistriesComponent implements OnInit {
   goToMinistries() {
     this.ngZone.run(() => {
       this.router.navigate(['ministries']);
+    });
+  }
+
+  deleteMinsitry() {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to proceed?  This cannot be undone!',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Confirmed',
+          detail: 'Ministry Deleted!!',
+        });
+        this.ministryService.deleteMinistry(this.id);
+        this.goToMinistries();
+        this.confirmationService.close();
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Rejected',
+              detail: 'You have rejected Ministry deletion.',
+            });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'Cancelled',
+              detail: 'You have cancelled Ministry deletion.',
+            });
+            break;
+        }
+        this.confirmationService.close();
+      },
     });
   }
 }
