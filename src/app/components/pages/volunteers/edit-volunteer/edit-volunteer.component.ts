@@ -145,8 +145,24 @@ export class EditVolunteerComponent {
       });
       this.targetMinistries =
         this.editVolunteerForm.controls['ministries'].value;
+      this.processSourceMinistries();
       this.loadingService.loadingOff();
     }, 2000);
+  }
+
+  processSourceMinistries() {
+    // Remove id's from Volunteers current ministry list
+    let ministriesToFilter: string[] = this.targetMinistries.map(
+      (ministry) => ministry.id!
+    );
+
+    // Filter Source Ministiries to only include ministries that are
+    // not already belonging to volunteer
+    let tempMinistires = this.sourceMinistries.filter((ministry) => {
+      return ministriesToFilter.indexOf(ministry.id!) == -1;
+    });
+    // Set Source Ministries in Form
+    this.sourceMinistries = tempMinistires;
   }
 
   get f() {
