@@ -1,0 +1,45 @@
+<div *ngIf="eventTypes$ | async as eventTypes">
+  <p-table
+    [value]="eventTypes"
+    [globalFilterFields]="['eventTypeName']"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    dataKey="id"
+    selectionMode="single"
+    (onRowSelect)="goToSelectedEventType($event)"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="ministryName">
+          <div class="flex justify-content-center">
+            Event Type
+            <p-sortIcon field="ministryName"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-eventType>
+      <tr [pSelectableRow]="eventType">
+        <td>
+          <div class="flex justify-content-center">
+            {{ eventType.eventTypeName }}
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No data found...</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Total Event Types:
+        {{ eventTypes ? eventTypes.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>

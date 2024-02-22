@@ -5,7 +5,11 @@ import { HeaderComponent } from '../../common/header/header.component';
 import { BodyComponent } from '../../common/body/body.component';
 import { CardComponent } from '../../common/card/card.component';
 
+import { EventTableComponent } from '../events/event-table/event-table.component';
+
 import { EventMinistriesTableComponent } from '../event-ministries/event-ministries-table/event-ministries-table.component';
+
+import { EventTypeTableComponent } from '../event-types/event-type-table/event-type-table.component';
 
 import { VolunteerTableComponent } from '../volunteers/volunteer-table/volunteer-table.component';
 
@@ -24,7 +28,9 @@ import { TabViewModule } from 'primeng/tabview';
     HeaderComponent,
     BodyComponent,
     CardComponent,
+    EventTableComponent,
     EventMinistriesTableComponent,
+    EventTypeTableComponent,
     VolunteerTableComponent,
     MinistryTableComponent,
     FamilyIdTableComponent,
@@ -34,6 +40,6 @@ import { TabViewModule } from 'primeng/tabview';
 })
 export class DashboardComponent {
   headerTitle: string = 'Dashboard';
-  headerIcon: string = 'pi pi-fw pi-list';
+  headerIcon: string = 'pi pi-fw pi-table';
   headerLogo: string = 'assets/MSP_Logo2.png';
 }

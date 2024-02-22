@@ -11,7 +11,9 @@
           <i class="pi pi-calendar mr-2"></i>
           <span>Events</span>
         </ng-template>
-        <app-card header="Events List"></app-card>
+        <app-card header="Events List">
+          <app-event-table></app-event-table>
+        </app-card>
       </p-tabPanel>
       <p-tabPanel
         ><ng-template pTemplate="header">
@@ -20,6 +22,15 @@
         </ng-template>
         <app-card header="Event Ministries List">
           <app-event-ministries-table></app-event-ministries-table>
+        </app-card>
+      </p-tabPanel>
+      <p-tabPanel
+        ><ng-template pTemplate="header">
+          <i class="pi pi-heart mr-2"></i>
+          <span>Event Types</span>
+        </ng-template>
+        <app-card header="Event Types List">
+          <app-event-type-table></app-event-type-table>
         </app-card>
       </p-tabPanel>
       <p-tabPanel
