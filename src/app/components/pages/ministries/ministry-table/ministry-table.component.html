@@ -1,6 +1,6 @@
-<div *ngIf="ministries$ | async as ministries">
+<div *ngIf="ministryTypes$ | async as ministryTypes">
   <p-table
-    [value]="ministries"
+    [value]="ministryTypes"
     [globalFilterFields]="['ministryName']"
     [paginator]="true"
     [rows]="5"
@@ -15,7 +15,7 @@
       <tr>
         <th pSortableColumn="ministryName">
           <div class="flex justify-content-center">
-            Name
+            Ministry Type
             <p-sortIcon field="ministryName"></p-sortIcon>
           </div>
         </th>
@@ -37,8 +37,8 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
-        Total Ministries:
-        {{ ministries ? ministries.length : 0 }}
+        Total Ministry Types:
+        {{ ministryTypes ? ministryTypes.length : 0 }}
       </div>
     </ng-template>
   </p-table>

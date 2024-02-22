@@ -49,10 +49,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./edit-ministries.component.scss'],
 })
 export class EditMinistriesComponent implements OnInit {
-  headerTitle: string = 'Edit Ministry';
+  headerTitle: string = 'Edit Ministry Type';
   headerIcon: string = 'pi pi-fw pi-heart';
   headerLogo: string = 'assets/MSP_Logo2.png';
-  cardHeader: string = 'Edit Ministry Form';
+  cardHeader: string = 'Edit Ministry Type Form';
 
   id: string = '';
   submitted: boolean = false;
@@ -154,7 +154,7 @@ export class EditMinistriesComponent implements OnInit {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: 'Ministry Updated!',
+        detail: 'Ministry Type Updated!',
         life: 3000,
         key: 'success',
       });
@@ -176,7 +176,7 @@ export class EditMinistriesComponent implements OnInit {
         this.messageService.add({
           severity: 'info',
           summary: 'Confirmed',
-          detail: 'Ministry Deleted!!',
+          detail: 'Ministry Type Deleted!!',
         });
         this.ministryService.deleteMinistry(this.id);
         this.goToMinistries();
@@ -188,14 +188,14 @@ export class EditMinistriesComponent implements OnInit {
             this.messageService.add({
               severity: 'error',
               summary: 'Rejected',
-              detail: 'You have rejected Ministry deletion.',
+              detail: 'You have rejected Ministry Type deletion.',
             });
             break;
           case ConfirmEventType.CANCEL:
             this.messageService.add({
               severity: 'warn',
               summary: 'Cancelled',
-              detail: 'You have cancelled Ministry deletion.',
+              detail: 'You have cancelled Ministry Type deletion.',
             });
             break;
         }

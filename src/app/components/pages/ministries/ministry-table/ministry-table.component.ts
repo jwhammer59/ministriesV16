@@ -17,14 +17,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./ministry-table.component.scss'],
 })
 export class MinistryTableComponent {
-  ministries$!: Observable<Ministry[]>;
+  ministryTypes$!: Observable<Ministry[]>;
 
   constructor(
     private ministryService: MinistryService,
     private router: Router,
     private ngZone: NgZone
   ) {
-    this.ministries$ = this.ministryService.getMinistries();
+    this.ministryTypes$ = this.ministryService.getMinistries();
   }
 
   goToSelectedMinistry(val: any) {

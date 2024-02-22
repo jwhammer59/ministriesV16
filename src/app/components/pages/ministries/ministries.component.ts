@@ -27,14 +27,14 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrls: ['./ministries.component.scss'],
 })
 export class MinistriesComponent implements OnInit {
-  headerTitle: string = 'Ministries';
+  headerTitle: string = 'Ministry Types';
   headerIcon: string = 'pi pi-fw pi-heart';
-  headerBtnToolTip: string = 'Add Ministiry';
+  headerBtnToolTip: string = 'Add Ministiry Type';
   headerBtnIcon: string = 'pi pi-fw pi-plus';
   headerBtnVisible: boolean = true;
   headerLogo: string = 'assets/MSP_Logo2.png';
 
-  cardHeader: string = 'Ministry List';
+  cardHeader: string = 'Ministry Types List';
 
   constructor(
     private router: Router,

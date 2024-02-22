@@ -40,10 +40,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-ministries.component.scss'],
 })
 export class AddMinistriesComponent implements OnInit {
-  headerTitle: string = 'Add Ministry';
+  headerTitle: string = 'Add Ministry Type';
   headerIcon: string = 'pi pi-fw pi-heart';
   headerLogo: string = 'assets/MSP_Logo2.png';
-  cardHeader: string = 'Add Ministry Form';
+  cardHeader: string = 'Add Ministry Type Form';
 
   id: string = '';
   submitted: boolean = false;
