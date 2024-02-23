@@ -75,6 +75,38 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'event-types',
+    loadComponent: () =>
+      import('./components/pages/event-types/event-types.component').then(
+        (m) => m.EventTypesComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-event-type',
+    loadComponent: () =>
+      import(
+        './components/pages/event-types/add-event-type/add-event-type.component'
+      ).then((m) => m.AddEventTypeComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-event-type/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/event-types/edit-event-type/edit-event-type.component'
+      ).then((m) => m.EditEventTypeComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'event-type-detail/:id',
+    loadComponent: () =>
+      import(
+        './components/pages/event-types/event-type-detail/event-type-detail.component'
+      ).then((m) => m.EventTypeDetailComponent),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'volunteers',
     loadComponent: () =>
       import('./components/pages/volunteers/volunteers.component').then(

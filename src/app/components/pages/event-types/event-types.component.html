@@ -1,1 +1,16 @@
-<p>event-types works!</p>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [buttonToolTip]="headerBtnToolTip"
+  [buttonIcon]="headerBtnIcon"
+  [buttonVisible]="headerBtnVisible"
+  [logo]="headerLogo"
+  (buttonAction)="addEventType()"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <app-card [header]="cardHeader">
+      <app-event-type-table></app-event-type-table>
+    </app-card>
+  </app-body>
+</div>

@@ -1,1 +1,100 @@
-<p>edit-event-type works!</p>
+<p-toast key="error"></p-toast>
+<p-toast key="success" (onClose)="goToEventTypes()"></p-toast>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [logo]="headerLogo"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <div class="flex justify-content-center">
+      <form
+        [formGroup]="editEventTypeForm"
+        (ngSubmit)="onSubmit(editEventTypeForm)"
+      >
+        <p-card
+          header="{{ cardHeader }}"
+          [style]="{ width: '70vw', backgroundColor: '#d0e1fd' }"
+        >
+          <ng-template pTemplate="content">
+            <div class="flex justify-content-center">
+              <div class="formgrid grid">
+                <div class="field col-12">
+                  <label for="eventTypeName">Event Type Name</label>
+                  <input
+                    id="eventTypeName"
+                    type="text"
+                    formControlName="eventTypeName"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    placeholder="Enter Event Type Name"
+                  />
+                  <small
+                    *ngIf="
+                      (f['eventTypeName'].invalid &&
+                        f['eventTypeName'].dirty) ||
+                      (editEventTypeForm.invalid &&
+                        this.submitted &&
+                        f['eventTypeName'].invalid)
+                    "
+                    id="eventTypeName-help"
+                    class="p-error"
+                    >{{ getEventTypeNameMessage() }}</small
+                  >
+                </div>
+                <div class="field col-12">
+                  <p-pickList
+                    [source]="sourceMinistries"
+                    [target]="targetMinistries"
+                    sourceHeader="Available Ministries"
+                    targetHeader="Selected Ministries"
+                    [dragdrop]="true"
+                    [responsive]="true"
+                    [sourceStyle]="{ height: '20rem' }"
+                    [targetStyle]="{ height: '20rem' }"
+                    breakpoint="1024px"
+                    (onMoveToTarget)="sendToEventTypesTarget()"
+                    (onMoveToSource)="sendToEventTypesSource()"
+                  >
+                    <ng-template let-ministries pTemplate="item">
+                      <div class="flex flex-wrap p-2 align-items-center gap-3">
+                        <div class="flex-1 flex flex-column gap-2">
+                          <span class="font-bold">Ministries: </span>
+                          <div class="flex align-items-center gap-2">
+                            <i class="pi pi-calendar text-sm"></i>
+                            <span>{{ ministries.eventMinistryName }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </p-pickList>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex justify-content-around">
+              <div>
+                <p-button
+                  type="submit"
+                  value="submit"
+                  [text]="true"
+                  label="Update"
+                  icon="pi pi-fw pi-save"
+                ></p-button>
+              </div>
+              <div>
+                <p-button
+                  label="Cancel"
+                  icon="pi pi-fw pi-times"
+                  [text]="true"
+                  severity="warning"
+                  (onClick)="goToEventTypes()"
+                ></p-button>
+              </div>
+            </div>
+          </ng-template>
+        </p-card>
+      </form>
+    </div>
+  </app-body>
+</div>
