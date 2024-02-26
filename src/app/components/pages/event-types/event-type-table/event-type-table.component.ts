@@ -29,7 +29,7 @@ export class EventTypeTableComponent {
 
   goToSelectedEventType(val: any) {
     this.ngZone.run(() => {
-      this.router.navigate([`edit-event-type/${val.data.id}`]);
+      this.router.navigate([`event-type-detail/${val.data.id}`]);
     });
   }
 }

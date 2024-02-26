@@ -1,1 +1,57 @@
-<p>event-type-detail works!</p>
+<p-toast></p-toast>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [logo]="headerLogo"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <p-card header="Event Type Details - {{ eventType.eventTypeName }}">
+      <ng-template pTemplate="content">
+        <div>
+          <div><span class="text-1xl font-bold">Required Ministries</span></div>
+          <div class="flex justify-content-start">
+            <div *ngFor="let ministry of eventType.requiredMinistries">
+              <ul>
+                <li>{{ ministry.eventMinistryName }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-around">
+          <p-button
+            [text]="true"
+            label="Back"
+            icon="pi pi-fw pi-arrow-circle-left"
+            severity="info"
+            (onClick)="goToEventTypes()"
+          ></p-button>
+          <p-button
+            [text]="true"
+            label="Edit"
+            icon="pi pi-fw pi-pencil"
+            severity="warning"
+            (onClick)="editEventType()"
+          ></p-button>
+          <p-button
+            [text]="true"
+            label="Delete"
+            icon="pi pi-fw pi-trash"
+            severity="danger"
+            (onClick)="deleteEventType()"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </app-body>
+</div>
+
+<p-confirmDialog
+  [style]="{ width: '30vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  acceptButtonStyleClass="p-button-text"
+  defaultFocus="reject"
+></p-confirmDialog>
