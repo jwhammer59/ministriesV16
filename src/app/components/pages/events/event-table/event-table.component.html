@@ -1,1 +1,82 @@
-<p>event-table works!</p>
+<div *ngIf="events$ | async as events">
+  <p-table
+    [value]="events"
+    [globalFilterFields]="[
+      'eventName',
+      'eventType',
+      'eventDate',
+      'eventIsFull'
+    ]"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    dataKey="id"
+    selectionMode="single"
+    (onRowSelect)="goToSelectedEvent($event)"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="eventName">
+          <div class="flex justify-content-center">
+            First Name
+            <p-sortIcon field="eventName"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="eventDate">
+          <div class="flex justify-content-center">
+            Last Name
+            <p-sortIcon field="eventDate"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="isActive">
+          <div class="flex justify-content-center">
+            Is Active?
+            <p-sortIcon field="isActive"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-event>
+      <tr [pSelectableRow]="event">
+        <td>
+          <div class="flex justify-content-center">
+            {{ event.eventName }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ event.eventType }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            {{ event.eventDate }}
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-center">
+            <p-checkbox
+              [(ngModel)]="event.eventIsFull"
+              [binary]="true"
+              inputId="binary"
+              [disabled]="true"
+            ></p-checkbox>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">No data found...</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        Total Events:
+        {{ events ? events.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>

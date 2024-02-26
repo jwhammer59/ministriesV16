@@ -1,1 +1,16 @@
-<p>events works!</p>
+<app-header
+  [title]="headerTitle"
+  [icon]="headerIcon"
+  [buttonToolTip]="headerBtnToolTip"
+  [buttonIcon]="headerBtnIcon"
+  [buttonVisible]="headerBtnVisible"
+  [logo]="headerLogo"
+  (buttonAction)="addEvent()"
+></app-header>
+<div class="flex justify-content-center mt-2">
+  <app-body>
+    <app-card header="Events List">
+      <app-event-table></app-event-table>
+    </app-card>
+  </app-body>
+</div>
