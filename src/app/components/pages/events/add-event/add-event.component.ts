@@ -11,6 +11,8 @@ import { EventsService } from 'src/app/services/events.service';
 import { EventType } from 'src/app/models/event-type';
 import { EventTypeService } from 'src/app/services/event-type.service';
 
+import { EventMinistry } from 'src/app/models/event-ministry';
+
 import {
   ReactiveFormsModule,
   FormsModule,
@@ -68,6 +70,11 @@ export class AddEventComponent implements OnInit {
 
   allEvents$!: Observable<Event[]>;
   allEventTypes$!: Observable<EventType[]>;
+  allEventTypesArray: EventType[] = [];
+
+  filteredEventType: EventType[] = [];
+
+  tempMinistries: string[] = [];
 
   constructor(
     private eventsService: EventsService,
@@ -87,6 +94,7 @@ export class AddEventComponent implements OnInit {
       eventIsFull: false,
     });
     this.allEventTypes$ = this.eventTypeService.getEventTypes();
+    this.allEventTypes$.subscribe((data) => (this.allEventTypesArray = data));
   }
 
   ngOnInit(): void {
@@ -125,6 +133,24 @@ export class AddEventComponent implements OnInit {
         key: 'success',
       });
     }
+  }
+
+  getRequiredMinistries(val: any) {
+    console.log(val.value);
+    this.filteredEventType = this.allEventTypesArray.filter(
+      (eventType) => eventType.eventTypeName === val.value
+    );
+    console.log(this.filteredEventType);
+    this.setRequiredMinistries();
+  }
+
+  setRequiredMinistries() {
+    this.filteredEventType.forEach((item) =>
+      item.requiredMinistries.forEach((ministry) =>
+        this.tempMinistries.push(ministry.eventMinistryName)
+      )
+    );
+    console.log(this.tempMinistries);
   }
 
   goToEvents() {
